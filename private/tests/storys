@@ -1,0 +1,73 @@
+Die Kernaufgabe der Software ist Fitnesspläne zu speichern und zu verwalten.
+Das heisst Übungen in die Datenbank aufnehmen und diese einem Plan zu zuweisen.
+
+Wenn ein Training ansteht wird der Plan ausgewählt und dann das Training durchgeführt.
+Während einem Training können sich die Übungen ändern. zB. kann sich das Gewicht
+der Übung verändern.
+
+Diese Veränderungen muss man in eine Übersicht grafisch darstellen. Dies dient dazu
+das man den Fortschritt sieht.
+
+Beispiel:
+In einem Plan befindet sich die Übung bankdrücken. Am Anfang wir die Übung
+mit 5kg gemacht. Nach einem halben jahr ist die Übung auf 20kg.
+Dieser Frotschritt muss Grafisch dargestellt werden.
+Mit Allen Trainings(Datum) wo diese Übung durchgeführt wurde. Und bei welchem
+Training dann genau die Steigerung oder die Senkung der Gewichte vorgenommen wurde.
+
+
+
+Auch Teil der ersten Version ist die Möglichkeit Periodisch sogenante "Zustandsdaten"
+zu erfassen. Das sind einerseits Messungen (Gewicht, Bauchumfang, Oberschenkelumfang usw.).
+Und andererseits sogenante "Statusimages"(Muss ein besseren namen finden!) wo man jeweils
+3 Bilder (Front, Seite, Rückseite ) von sich hochladen kann.
+
+Dies dient dazu das man den Fortschritt über längere zeit genauer betrachten kann.
+
+
+/// Übungen (Exercises)
+Übungen definieren sich durch 2 Pflichfelder. Den Titel und den Typen.
+Zusätzlich gibt es die Felder: title, weight, duration, numberOfSets, repsInSet, description und distance.
+Bedeutung:
+Titel: Ein kurzer Titel für die Übung. zB Running, Lifting.
+Description: Eine ausführliche Beschreibung der Übung.
+Weight: Das gewicht (zB Hanteln) in Kg.
+Duration: Die Dauer der übung in Minuten. zB beim Laufen.
+Distance: Die entfernung in km. zB 5Km rennen.
+numberOfSets: Die anzahl Sets. Das heisst man macht die Übung zb. 3 mal mit X Wiederholungen.
+repsInSet: Die anzahl Widerholungen in einem Set.
+
+// Training (Trainings)
+Ein Training besitz keine eigenen Felder. Im Grunde ist es nur ein Verbindungsstück.
+Wird ein neues Training gestartet werden Übungen aus einem Plan in dem Training gespeichert.
+Und während der Durchführungen als erledigt markiert. Zusätzlich muss eingetragen werden
+wenn sich wärend der Durchführung sich die werte der Übung verändern.Für dies muss jedoch
+noch eine Gute lösung gefunden werden, wo das diese Infos gespeichert werden. Eine
+Idee wäre in einer weiteren Collection.
+
+/// Plan (Plans)
+Ein Plan besteht aus einem Pflichfeld. Dem Titel.
+Ansonsten besitz der Plan keine eigenten Felder sondern
+Beziehungen auf Übungen und auf Trainings.
+
+
+/// Messungen (Measurements)
+Eine Messung hat keine Pflichfelder. Es muss dafür mindestens eines der Vorgegeben
+vorhanden sein. Zur Zeit gibt es die Felder upperarm, chest, waist, thigh, weight:
+Bedeutung:
+upperarm: Der umfang des Oberarms. in cm
+chest: Brustumfang in cm
+waist: Talie in cm
+thigh: Oberschenkel in cm
+weight: Das gewicht in kg
+
+
+// Statusimages (Neuer namen suchen!)
+Die statusimages sind 3 Bilder und sollen aufzeigen wie viel Fortschritt man
+gemacht hat. Die Bilder werden auf Amazon S3 gespeichert.
+
+
+
+//Profile
+In dem profile wird das alter und das geschlecht abgespeichert. Plus hat er
+die Möglichkeit ein Profilbild hochzuladen. Das Bild wird auf Amazon S3 gespeichert.
